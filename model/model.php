@@ -27,7 +27,7 @@ function connectDb(): PDO
 function showAllMessages(): array
 {
     $dbh = connectDb();
-    $query = 'SELECT * FROM messages ';
+    $query = 'SELECT * FROM messages ORDER BY date DESC LIMIT 5';
     $req = $dbh->prepare($query);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_ASSOC);
@@ -39,5 +39,19 @@ function showAllMessages(): array
 
 }
 
+function addMessage(array $data): void
+{
+    extract($data);
+    // print_r($data);
+    // die;
+    $date = new DateTime();
+    $dbh = ConnectDb();
+    $query = 'INSERT INTO messages(author, content, date) VALUES(:author, :content, Now())';
+    $req = $dbh->prepare($query);
+    $req->execute([
+        'author' => $author,
+        'content' => $content
+    ]);
+}
 
-
+    
