@@ -16,7 +16,7 @@
 require 'model/model.php';
 
 try {
-    $tab = showAllMessages();
+    $tab = findAll();
     require 'chat.php';
     require 'form.php';
 } catch (PDOException $e) {
