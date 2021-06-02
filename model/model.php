@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Connexion à la base de données
+ *
+ * @return PDO
+ */
 function getDBConnection(): PDO
 {
     // Couche d'accès au données
@@ -23,7 +29,11 @@ function getDBConnection(): PDO
     return $dbh;
 }
 
-
+/**
+ * Affichage de messages
+ *
+ * @return array
+ */
 function findAll(): array
 {
     $dbh = getDBConnection();
@@ -33,21 +43,21 @@ function findAll(): array
     $req->setFetchMode(PDO::FETCH_ASSOC);
     $tab = $req->fetchAll();
     $req->closeCursor();
-    // var_dump($tab);
-    // die();
     return $tab;
 }
 
-function addMessage(array $data): void
+/**
+ * Insertion de message avec une requête préparée
+ *
+ * @param array $data
+ * @return void
+ */
+function addMessage(array $data)
 {
-    extract($data);
-    // print_r($data);
-    // die;
     $dbh = getDBConnection();
     $query = 'INSERT INTO messages(author, content, date) VALUES(:author, :content, Now())';
     $req = $dbh->prepare($query);
-    $req->execute([
-        'author' => $author,
-        'content' => $content
-    ]);
+    $req->bindValue('author', $data['author'], PDO::PARAM_STR);
+    $req->bindValue('content', $data['content'], PDO::PARAM_STR);
+    $req->execute();
 }

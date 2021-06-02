@@ -1,12 +1,16 @@
 <?php
-require 'view/default.php';
-if ($_GET) {
-    if(isset($_GET['author']) && isset($_GET['content'])){
-        // var_dump($_GET);
-        // die;
-        addMessage($_GET);
+
+require 'model/model.php';
+require 'service/helpers.php';
+
+if (isset($_GET) && isset($_GET['submit'])) {
+    if ($_GET['author'] == null || $_GET['content'] == null) {
         findAll();
+    } else {
+        addMessage(arrayValidate($_GET));
+        header('Location:./');
+        exit();
     }
-} else {
-    findAll();
-} 
+}
+require 'view/default.php';
+

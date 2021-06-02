@@ -1,4 +1,4 @@
-<form action="">
+<form action="index.php">
   <fieldset>
     <div class="form-group row d-flex align-items-baseline">
         <div class="form-group col-4">
@@ -10,6 +10,6 @@
             <textarea class="form-control" name="content" id="exampleTextarea" rows="3" placeholder="Entrez vos messages"></textarea>
         </div>
     </div>        
-    <input type="submit" class="btn btn-primary" value="Sumbit">
+    <input type="submit" class="btn btn-primary" name="submit" value="Submit">
   </fieldset>
 </form>
