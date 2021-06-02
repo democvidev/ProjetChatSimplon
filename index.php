@@ -1,2 +1,2 @@
 <?php
-require 'view/home.php';
+require 'view/default.php';
