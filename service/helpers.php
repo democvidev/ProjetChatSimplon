@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Traitement des données d'une chaine de caractère
+ *
+ * @param string $data
+ * @return string
+ */
 function validate(string $data): string
 {
     $data = trim($data); //supprimer les espaces dans la requête de l'internaute, en début et fin de chaîne
@@ -9,6 +15,12 @@ function validate(string $data): string
     return $data;
 }
 
+/**
+ * Traitement des données d'un tableau
+ *
+ * @param array $arrayData
+ * @return array
+ */
 function arrayValidate(array $arrayData): array
 {
     $newArray = [];
