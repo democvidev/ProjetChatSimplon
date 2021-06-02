@@ -1,7 +1,12 @@
 <?php
 require 'view/default.php';
-
-if(isset($_GET['sub']) && $_GET['sub'] !== null){
-    addMessage($_GET);
-    showAllMessages();
+if ($_GET) {
+    if(isset($_GET['author']) && isset($_GET['content'])){
+        // var_dump($_GET);
+        // die;
+        addMessage($_GET);
+        findAll();
+    }
+} else {
+    findAll();
 } 

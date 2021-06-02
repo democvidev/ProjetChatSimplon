@@ -1,5 +1,5 @@
 <?php
-function connectDb(): PDO
+function getDBConnection(): PDO
 {
     // Couche d'accès au données
     $user = "root";
@@ -24,9 +24,9 @@ function connectDb(): PDO
 }
 
 
-function showAllMessages(): array
+function findAll(): array
 {
-    $dbh = connectDb();
+    $dbh = getDBConnection();
     $query = 'SELECT * FROM messages ORDER BY date DESC LIMIT 5';
     $req = $dbh->prepare($query);
     $req->execute();
@@ -36,7 +36,6 @@ function showAllMessages(): array
     // var_dump($tab);
     // die();
     return $tab;
-
 }
 
 function addMessage(array $data): void
@@ -44,7 +43,7 @@ function addMessage(array $data): void
     extract($data);
     // print_r($data);
     // die;
-    $dbh = ConnectDb();
+    $dbh = getDBConnection();
     $query = 'INSERT INTO messages(author, content, date) VALUES(:author, :content, Now())';
     $req = $dbh->prepare($query);
     $req->execute([
@@ -52,5 +51,3 @@ function addMessage(array $data): void
         'content' => $content
     ]);
 }
-
-    
