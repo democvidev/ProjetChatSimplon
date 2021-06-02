@@ -1,6 +1,6 @@
 <form>
   <fieldset>
-    <div class="form-group row d-flex">
+    <div class="form-group row d-flex align-items-baseline">
         <div class="form-group col-4">
             <label for="login" class="col-sm-2 col-form-label"></label>
             <input type="text" class="form-control" id="login" placeholder="Entrez votre pseudo" value="">
