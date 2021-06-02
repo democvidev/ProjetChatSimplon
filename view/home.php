@@ -11,4 +11,13 @@
 <body>
 <div class="container">
 <h1>Live chat Amazin</h1>
+
+<?php 
+require 'chat.php';
+require 'form.php';
+?>
+
+</div>
+</body>
+</html>
     
