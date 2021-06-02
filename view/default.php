@@ -16,7 +16,6 @@
 require 'model/model.php';
 
 try {
-    //code...
     $tab = showAllMessages();
     require 'chat.php';
     require 'form.php';
