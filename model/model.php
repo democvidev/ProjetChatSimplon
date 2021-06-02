@@ -44,7 +44,6 @@ function addMessage(array $data): void
     extract($data);
     // print_r($data);
     // die;
-    $date = new DateTime();
     $dbh = ConnectDb();
     $query = 'INSERT INTO messages(author, content, date) VALUES(:author, :content, Now())';
     $req = $dbh->prepare($query);
