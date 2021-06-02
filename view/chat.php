@@ -8,7 +8,7 @@
     </thead>
     <tbody>
   <?php 
-     if (isset($tab)) {
+     if (isset($tab) && $tab != null) {
          foreach ($tab as $row) {
              ?>
     <tr class="row table-light">

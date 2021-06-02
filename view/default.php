@@ -9,24 +9,23 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="container">
-<h1>Live chat Amazin</h1>
+    <div class="container">
+        <h1>Live chat Amazin</h1>
 
-<?php
-require 'model/model.php';
+        <?php
 
-try {
-    $tab = findAll();
-    require 'chat.php';
-    require 'form.php';
-} catch (PDOException $e) {
-    $ex = 'Erreur : ' . $e->getMessage();
-    require 'exception.php';
-}
+        try {
+            $tab = findAll();
+            require 'chat.php';
+            require 'form.php';
+        } catch (PDOException $e) {
+            $ex = 'Erreur : ' . $e->getMessage();
+            require 'exception.php';
+        }
 
-?>
+        ?>
 
-</div>
+    </div>
 </body>
 </html>
     
