@@ -10,6 +10,6 @@
             <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Entrez vos messages"></textarea>
         </div>
     </div>        
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input type="submit" class="btn btn-primary" name="submit" value="Sumbit">
   </fieldset>
 </form>
