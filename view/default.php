@@ -15,6 +15,13 @@
         <?php
 
         try {
+            if (isset($_GET) && isset($_GET['submit'])) {
+                if ($_GET['author'] != null && $_GET['content'] != null) {                
+                    addMessage(arrayValidate($_GET));
+                    header('Location:./');
+                    exit();
+                }
+            }
             $tab = findAll();
             require 'chat.php';
             require 'form.php';

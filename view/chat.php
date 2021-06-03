@@ -12,9 +12,9 @@
          foreach ($tab as $row) {
              ?>
     <tr class="row table-light">
-      <td class="col-2"><?= $row['date'] ?></td>
-      <td class="col-2"><?= $row['author'] ?></td>
-      <td class="col-8"><?= $row['content'] ?></td>
+      <td class="col-2"><?= htmlspecialchars($row['date']) ?></td>
+      <td class="col-2"><?= htmlspecialchars($row['author']) ?></td>
+      <td class="col-8"><?= htmlspecialchars($row['content']) ?></td>
     </tr> 
   <?php
          }
