@@ -37,7 +37,7 @@ function getDBConnection(): PDO
 function findAll(): array
 {
     $dbh = getDBConnection();
-    $query = 'SELECT * FROM messages ORDER BY date DESC LIMIT 5';
+    $query = 'SELECT * FROM messages ORDER BY id DESC LIMIT 5';
     $req = $dbh->prepare($query);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_ASSOC);
@@ -60,4 +60,56 @@ function addMessage(array $data)
     $req->bindValue('author', $data['author'], PDO::PARAM_STR);
     $req->bindValue('content', $data['content'], PDO::PARAM_STR);
     $req->execute();
+}
+
+/**
+ * Modification message
+ *
+ * @param array $data
+ * @return void
+ */
+function updateMessage(array $data)
+{
+    $dbh = getDBConnection();
+    $query = 'UPDATE messages SET content = :content, author = :author WHERE id =:id';
+    $req = $dbh->prepare($query);
+    $req->bindValue('author', $data['author'], PDO::PARAM_STR);
+    $req->bindValue('content', $data['content'], PDO::PARAM_STR);
+    $req->bindValue('id', $data['id'], PDO::PARAM_INT);
+    $req->execute();
+
+}
+
+/**
+ * Affichage d'un seul message
+ *
+ * @param integer $message
+ * @return array
+ */
+function findOne(int $message): array
+{
+    $dbh = getDBConnection();
+    $query = 'SELECT * FROM messages WHERE id =:id';
+    $req = $dbh->prepare($query);
+    $req->bindValue('id', $message, PDO::PARAM_INT);
+    $req->execute();
+    $row = $req->fetch();
+    $req->closeCursor();
+    return $row;
+}
+
+/**
+ * Supprime le message
+ *
+ * @param integer $message
+ * @return void
+ */
+function deleteMessage(int $message): void
+{
+    $dbh = getDBConnection();
+    $query = 'DELETE FROM messages WHERE id = :id';
+    $req = $dbh->prepare($query);
+    $req->bindValue('id', $message, PDO::PARAM_INT);
+    $req->execute();
+    $req->closeCursor();
 }
