@@ -24,14 +24,32 @@
                     if (isset($_GET['id']) && $_GET['action'] == 'delete') {
                         deleteMessage($_GET['id']);
                         header('Location:./index.php');
-                        exit(); 
+                        exit();
                     }
                 }
                 if (isset($_GET['submit'])) {
                     if (isset($_GET['id']) && $_GET['submit'] == 'Modifier') {
+                        if (isValidForm($_GET) !== []) {
+                            $errors = isValidForm($_GET);
+                            $tab = findAll();
+                            require 'chat.php';
+                            require 'form.php';
+                            exit();                           
+                        }
+
                         updateMessage($_GET);
                     }
                     if ($_GET['author'] != null && $_GET['content'] != null && $_GET['submit'] == 'Submit') {
+                        if (isValidForm($_GET) !== []) {
+                            // var_dump(isValidForm($_GET));
+                            // die;
+                            $errors = isValidForm($_GET);                            
+                            $tab = findAll();
+                            require 'chat.php';
+                            require 'form.php';
+                            exit();
+                        }
+
                         addMessage($_GET);
                         header('Location:./index.php');
                         exit();

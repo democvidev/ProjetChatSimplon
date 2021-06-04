@@ -1,5 +1,8 @@
 <?php
 
+const MIN_NAME_LENGTH = 2;
+
+
 /**
  * Traitement des données d'une chaine de caractère
  *
@@ -29,4 +32,20 @@ function arrayValidate(array $arrayData): array
         $newArray += [$key => $data];
     }
     return $newArray;
+}
+
+function isValidForm(array $array): array
+{
+    $errorMessage = [];
+    foreach ($array as $key => $value) {
+        if ($key == 'author' && strlen($value) < MIN_NAME_LENGTH) {
+            $errorMessage += [ $key => ' Erreur : 
+ ce champ doit contenir au moins 2 caractères'];
+        }
+        if ($key == 'content' && strlen($value) < MIN_NAME_LENGTH) {
+            $errorMessage += [ $key => ' Erreur : 
+ ce champ doit contenir au moins 2 caractères'];
+        }
+    }
+    return $errorMessage;
 }
