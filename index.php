@@ -30,7 +30,6 @@ try {
                     $errors = isValidForm($_GET);
                     $tab = findAll();                   
                     require 'view/default.php';
-                    exit();
                 }
                 addMessage($_GET);
                 header('Location:./index.php');

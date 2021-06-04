@@ -37,7 +37,7 @@ function getDBConnection(): PDO
 function findAll(): array
 {
     $dbh = getDBConnection();
-    $query = 'SELECT * FROM messages ORDER BY id DESC LIMIT 10';
+    $query = 'SELECT id, content, author, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM messages ORDER BY id DESC LIMIT 10';
     $req = $dbh->prepare($query);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_ASSOC);
