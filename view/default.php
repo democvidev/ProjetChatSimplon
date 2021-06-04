@@ -19,20 +19,20 @@
             if (isset($_GET)) {
                 if (isset($_GET['action'])) {
                     if (isset($_GET['id']) && $_GET['action'] == 'update') {
-                        $message = findOne(validate($_GET['id']));
+                        $message = findOne($_GET['id']);
                     }
                     if (isset($_GET['id']) && $_GET['action'] == 'delete') {
-                        deleteMessage(validate($_GET['id']));
+                        deleteMessage($_GET['id']);
                         header('Location:./index.php');
                         exit(); 
                     }
                 }
                 if (isset($_GET['submit'])) {
                     if (isset($_GET['id']) && $_GET['submit'] == 'Modifier') {
-                        updateMessage(arrayValidate($_GET));
+                        updateMessage($_GET);
                     }
                     if ($_GET['author'] != null && $_GET['content'] != null && $_GET['submit'] == 'Submit') {
-                        addMessage(arrayValidate($_GET));
+                        addMessage($_GET);
                         header('Location:./index.php');
                         exit();
                     }
