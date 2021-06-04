@@ -1,4 +1,4 @@
-<form action="">
+<form action="index.php#button" id="button">
   <fieldset>
     <div class="form-group row d-flex align-items-baseline">
         <div class="form-group col-4">
