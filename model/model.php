@@ -37,7 +37,7 @@ function getDBConnection(): PDO
 function findAll(): array
 {
     $dbh = getDBConnection();
-    $query = 'SELECT id, content, author, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM messages ORDER BY id DESC LIMIT 10';
+    $query = 'SELECT id, content, author, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM messages ORDER BY id DESC LIMIT 0, 10;';
     $req = $dbh->prepare($query);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ function findAll(): array
 function addMessage(array $data)
 {
     $dbh = getDBConnection();
-    $query = 'INSERT INTO messages(author, content, date) VALUES(:author, :content, Now())';
+    $query = 'INSERT INTO messages(author, content, date) VALUES(:author, :content, Now());';
     $req = $dbh->prepare($query);
     $req->bindValue('author', $data['author'], PDO::PARAM_STR);
     $req->bindValue('content', $data['content'], PDO::PARAM_STR);
@@ -71,7 +71,7 @@ function addMessage(array $data)
 function updateMessage(array $data)
 {
     $dbh = getDBConnection();
-    $query = 'UPDATE messages SET content = :content, author = :author WHERE id =:id';
+    $query = 'UPDATE messages SET content = :content, author = :author WHERE id =:id;';
     $req = $dbh->prepare($query);
     $req->bindValue('author', $data['author'], PDO::PARAM_STR);
     $req->bindValue('content', $data['content'], PDO::PARAM_STR);
@@ -89,7 +89,7 @@ function updateMessage(array $data)
 function findOne(int $message): array
 {
     $dbh = getDBConnection();
-    $query = 'SELECT * FROM messages WHERE id =:id';
+    $query = 'SELECT * FROM messages WHERE id =:id;';
     $req = $dbh->prepare($query);
     $req->bindValue('id', $message, PDO::PARAM_INT);
     $req->execute();
@@ -107,9 +107,35 @@ function findOne(int $message): array
 function deleteMessage(int $message): void
 {
     $dbh = getDBConnection();
-    $query = 'DELETE FROM messages WHERE id = :id';
+    $query = 'DELETE FROM messages WHERE id = :id;';
     $req = $dbh->prepare($query);
     $req->bindValue('id', $message, PDO::PARAM_INT);
     $req->execute();
     $req->closeCursor();
+}
+
+function countAllMessages(): int
+{
+    $dbh = getDBConnection();
+    $query = 'SELECT COUNT(*) AS nb_messages FROM `messages`;';
+    $req = $dbh->prepare($query);
+    $req->execute();
+    $row = $req->fetch();
+    $nb_messages = (int) $row['nb_messages'];
+    $req->closeCursor();
+    return $nb_messages;
+}
+
+function messagePaginator (int $premier, int $parPage): array
+{
+    $dbh = getDBConnection();
+    $query = 'SELECT * FROM messages ORDER BY date DESC LIMIT :premier, :parpage;';
+    $req = $dbh->prepare($query);
+    $req->bindValue(':premier', $premier, PDO::PARAM_INT);
+    $req->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+    $req->execute();
+    $req->setFetchMode(PDO::FETCH_ASSOC);
+    $tab = $req->fetchAll();
+    $req->closeCursor();
+    return $tab;
 }
