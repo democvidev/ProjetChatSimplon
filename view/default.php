@@ -16,6 +16,7 @@
         <?php
         require 'chat.php';
         require 'form.php';
+        require 'pagination.php';
         ?>
 
     </div>

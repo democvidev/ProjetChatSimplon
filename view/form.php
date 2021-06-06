@@ -44,6 +44,8 @@
               echo htmlspecialchars($message['id']);
           } ?>">
     </div>
-    <input type="submit" class="btn btn-primary" name="submit" value="<?= isset($message) ? 'Modifier' : 'Submit' ?>">
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" name="submit" value="<?= isset($message) ? 'Modifier' : 'Submit' ?>">
+    </div>
   </fieldset>
 </form>
