@@ -15,4 +15,8 @@ Modification de messages
 
 Suppression de messages
 
+Pagination
+
+Date Formatée
+
 
