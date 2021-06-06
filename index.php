@@ -28,7 +28,7 @@ try {
             }
             if (isset($_GET['id']) && $_GET['action'] == 'delete') {
                 deleteMessage($_GET['id']);
-                if ($premier){
+                if ($premier != 0){
                     exit(header('Location:./index.php?page=' . $pages));                
                 } else {
                     $pages--;
@@ -39,11 +39,11 @@ try {
         if (isset($_GET['submit'])) {
             if (isset($_GET['id']) && $_GET['submit'] == 'Modifier') {
                 updateMessage($_GET);
-                exit(header('Location:./index.php?page=' . $pages));
+                exit(header('Location:./index.php?page=' . $pages . '&author=' . $_GET['author']));
             }
             if ($_GET['author'] != null && $_GET['content'] != null && $_GET['submit'] == 'Submit') {
                 addMessage($_GET);
-                exit(header('Location:./index.php?page=' . $pages));
+                exit(header('Location:./index.php?author=' . $_GET['author']));
             }
         }
     }
@@ -54,3 +54,4 @@ try {
 }
 
 require 'view/default.php';
+exit();
