@@ -10,7 +10,7 @@
             placeholder="Entrez votre pseudo" 
             value="<?php if (isset($message)) {
     echo htmlspecialchars($message['author']);
-} ?>">
+} else if (isset($_GET['author'])) {echo htmlspecialchars($_GET['author']);} ?>">
             <small class="small"><?php
           if (isset($errors)) {
               foreach ($errors as $key => $value) {
